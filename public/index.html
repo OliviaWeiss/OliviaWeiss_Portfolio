@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title>NASA Astronomy Picture of the Day</title>
+  <!-- Twentieth Century font via Monotype.com --->
+  <link
+    href="https://cdn.fonts.net/kit/7b6b1e00-8b68-11ec-9ce3-0220834439f4/7b6b1e00-8b68-11ec-9ce3-0220834439f4.css"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="planet.png"
+  >
+  <script
+    defer
+    src="script.js"
+  ></script>
+</head>
+
+<body>
+  <header>
+    <h1>NASA APOD</h1>
+    <h3>Astronomy Picture of the Day</h3>
+  </header>
+  <main id="app">
+    <form>
+      <label for="dataPicker">Pick a Date</label>
+      <input
+        type="date"
+        id="datePicker"
+      >
+    </form>
+    <section id="apod">
+      <!-- JavaScript will put APOD images here. -->
+    </section>
+  </main>
+  <footer>
+    <i>Created by <a href="https://nsitu.ca">Harold Sikkema</a> in the context of Systems Design in the Interaction
+      Design program at Sheridan College. Images via <a href="https://api.nasa.gov/">NASA APOD API</a></i>
+  </footer>
+</body>
+
+</html>
