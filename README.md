@@ -1,19 +1,52 @@
-# HideYourKeys
+# Olivia Weiss Portfolio
 
-## NASA Revisited
-NodeJS can help us to secure our API Keys. To test this out, compare this code with the [prior NASA example](https://github.com/ixd-system-design/UI-for-Data-Fetching/tree/main/nasa), in which our API Key was publicly visible. 
+This repository is a static portfolio site. The site's static assets (HTML, CSS, JS, images) live in the `public/` folder. There's also a small `server.js` which serves `public/` locally for development.
 
-## Learning Prompts
-Can you add your own Nasa API Key to the environment in order to make this code function?
-- Create a `.env` (dotenv) file in your project folder to set the `NASA_KEY` environment variable. (Use .env.example as a model).
-- It may look something like this:
+## Local development
+
+Install dependencies and start the local Express server:
+
+```bash
+npm install
+npm start
+```
+
+Then open http://localhost:3000 to preview the site.
+
+## Deploying to Vercel (recommended)
+
+The simplest path is to deploy the static `public/` folder to Vercel. This repository includes a `build` script that copies `public/` into `dist/` and a `vercel.json` config so Vercel will treat the repo as a static site.
+
+Option A — Import the repository into Vercel
+1. Go to https://vercel.com and import this Git repository.
+2. Set the Build Command to:
+
+```bash
+npm run build
+```
+
+and the Output Directory to:
 
 ```
-NASA_KEY=abc123def456...
+dist
 ```
 
-## Local Development
- You will need [NodeJS](https://nodejs.org) to work on this project; Install it first if you haven't already. This is a template repo; you can make your own repository via the `Use this template` button in GitHub. Once you have your own repo, clone it to your local machine in VSCode. Then, open the terminal and run: `npm install`. This will install dependencies including Express. Then create a `.env` file using `.env.example` as a model. Populate it with your actual API key from NASA. Finally, run the app with the following terminal command: `npm run start`.
+3. Deploy. Vercel will run the build script, publish `dist/`, and host the static site.
 
-## Vercel
-This project uses the [Express](https://expressjs.com) framework in a manner [supported by Vercel](https://vercel.com/docs/frameworks/backend/express). You can host an Express app for free as a [Vercel Function](https://vercel.com/docs/functions) a on a [Vercel Hobby Plan](https://vercel.com/docs/plans/hobby). When deploying to Vercel you can set your Environment Variables (e.g. `NASA_KEY`) during the deploy process.
+Option B — CLI deploy
+
+Install the Vercel CLI and run a production deploy from the repository root:
+
+```bash
+npm i -g vercel
+vercel --prod
+```
+
+Vercel will run `npm run build` and publish the `dist/` folder.
+
+Notes
+- If you prefer to run the Node server on Vercel instead of deploying a static site, I can adjust `vercel.json` to deploy `server.js` as a serverless function. Tell me and I'll prepare that config.
+- The project's static assets live in `public/`. If you add new static files, they'll be included automatically when you run the build.
+
+---
+Generated and prepared for Vercel deployment by the project maintainer.

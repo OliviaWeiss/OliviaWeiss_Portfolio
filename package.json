@@ -2,7 +2,8 @@
   "name": "sikkemha",
   "main": "server.js",
   "scripts": {
-    "start": "node --env-file=.env server.js"
+    "start": "node --env-file=.env server.js",
+    "build": "rm -rf dist && cp -R public dist"
   },
   "keywords": [],
   "author": "",
