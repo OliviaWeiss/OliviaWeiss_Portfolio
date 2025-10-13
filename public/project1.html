@@ -215,6 +215,11 @@
         });
         console.table(diag);
       }catch(e){/* ignore console errors */}
+      console.log('Classification Results:', imagesMeta.map(img => {
+        const forced = FORCED_FINAL.includes(img.file) ? 'final' : (FORCED_SKETCHES.includes(img.file) ? 'sketch' : (FORCED_DIGITAL.includes(img.file) ? 'digital' : 'auto'));
+        const auto = img.size <= SKETCH_THRESHOLD ? 'sketch' : 'digital';
+        return { file: img.file, size: img.size, forced: forced, auto: auto, override: !!overrides[img.file] };
+      }));
     </script>
   </main>
   <footer class="site-footer">
