@@ -105,14 +105,21 @@
           {file:'assets/processimg.png', caption:'process', size:900000}
       ];
 
-      const OVERRIDES_KEY = 'project1-classifications';
-      const overrides = JSON.parse(localStorage.getItem(OVERRIDES_KEY) || '{}');
+  const OVERRIDES_KEY = 'project1-classifications';
+  const overrides = JSON.parse(localStorage.getItem(OVERRIDES_KEY) || '{}');
 
-      const sketchesGrid = document.getElementById('sketches-grid');
-      const digitalGrid = document.getElementById('digital-grid');
+  const sketchesGrid = document.getElementById('sketches-grid');
+  const digitalGrid = document.getElementById('digital-grid');
 
-      // classify by heuristic: small files more likely sketches; threshold in bytes
-      const SKETCH_THRESHOLD = 300000; // 300 KB
+  // classify by heuristic: small files more likely sketches; threshold in bytes
+  const SKETCH_THRESHOLD = 300000; // 300 KB
+
+  // Optional forced classification lists. Use these to explicitly place images
+  // into a section if the heuristic misclassifies them. Leave arrays empty to
+  // use automatic heuristic behavior.
+  const FORCED_SKETCHES = []; // e.g. ['assets/IMG15.png']
+  const FORCED_DIGITAL = [];  // e.g. ['assets/IMG12.png']
+  const FORCED_FINAL = ['assets/IMG11.png','assets/IMG12.png','assets/IMG13.png'];
 
       function render() {
         sketchesGrid.innerHTML = '';
@@ -123,11 +130,16 @@
         const final = [];
         imagesMeta.forEach(img => {
             // Force certain files into the final section
-            if(['assets/IMG11.png','assets/IMG12.png','assets/IMG13.png'].includes(img.file)){
+            if(FORCED_FINAL.includes(img.file)){
               final.push(img);
               return;
             }
-            const state = overrides[img.file] || (img.size <= SKETCH_THRESHOLD ? 'sketch' : 'digital');
+
+            // Forced placement (overrides heuristic)
+            let state;
+            if(FORCED_SKETCHES.includes(img.file)) state = 'sketch';
+            else if(FORCED_DIGITAL.includes(img.file)) state = 'digital';
+            else state = overrides[img.file] || (img.size <= SKETCH_THRESHOLD ? 'sketch' : 'digital');
             if(state === 'sketch') sketches.push(img);
             else digital.push(img);
         });
@@ -191,7 +203,18 @@
           if(localStorage.getItem(shadowsKey) === 'true'){ if(g1) g1.classList.add('reduced-shadows'); if(g2) g2.classList.add('reduced-shadows'); }
         }catch(e){ /* ignore storage errors */ }
       })();
+      // Run render and print a diagnostic table to the console so we can review
+      // how each image was classified. This makes it easy to see if sketches
+      // and digital images were flipped by the heuristic.
       render();
+      try{
+        const diag = imagesMeta.map(img => {
+          const forced = FORCED_FINAL.includes(img.file) ? 'final' : (FORCED_SKETCHES.includes(img.file) ? 'sketch' : (FORCED_DIGITAL.includes(img.file) ? 'digital' : 'auto'));
+          const auto = img.size <= SKETCH_THRESHOLD ? 'sketch' : 'digital';
+          return { file: img.file, size: img.size, forced: forced, auto: auto, override: !!overrides[img.file] };
+        });
+        console.table(diag);
+      }catch(e){/* ignore console errors */}
     </script>
   </main>
   <footer class="site-footer">
