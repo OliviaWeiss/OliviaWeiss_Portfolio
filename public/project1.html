@@ -111,8 +111,10 @@
   const sketchesGrid = document.getElementById('sketches-grid');
   const digitalGrid = document.getElementById('digital-grid');
 
-  // classify by heuristic: small files more likely sketches; threshold in bytes
-  const SKETCH_THRESHOLD = 300000; // 300 KB
+  // classify by heuristic: small images (pixel width) more likely sketches.
+  // File sizes can vary after deployment; naturalWidth is stable across hosts.
+  const SKETCH_THRESHOLD = 300000; // fallback by bytes (legacy)
+  const PIXEL_WIDTH_THRESHOLD = 900; // images with width <= 900px considered sketches
 
   // Optional forced classification lists. Use these to explicitly place images
   // into a section if the heuristic misclassifies them. Leave arrays empty to
@@ -125,57 +127,71 @@
         sketchesGrid.innerHTML = '';
         digitalGrid.innerHTML = '';
         // Build arrays for sketches and digital, preserving user overrides
-        const sketches = [];
-        const digital = [];
-        const final = [];
-        imagesMeta.forEach(img => {
-            // Force certain files into the final section
-            if(FORCED_FINAL.includes(img.file)){
-              final.push(img);
-              return;
-            }
+        async function render() {
+          sketchesGrid.innerHTML = '';
+          digitalGrid.innerHTML = '';
+          // Build arrays for sketches and digital, preserving user overrides
+          const sketches = [];
+          const digital = [];
+          const final = [];
 
-            // Forced placement (overrides heuristic)
-            let state;
-            if(FORCED_SKETCHES.includes(img.file)) state = 'sketch';
-            else if(FORCED_DIGITAL.includes(img.file)) state = 'digital';
-            else state = overrides[img.file] || (img.size <= SKETCH_THRESHOLD ? 'sketch' : 'digital');
-            if(state === 'sketch') sketches.push(img);
-            else digital.push(img);
-        });
+          // Preload images and read their naturalWidth to classify reliably
+          const loaded = await Promise.all(imagesMeta.map(img => new Promise(resolve => {
+            const im = new Image();
+            im.onload = () => resolve({ ...img, width: im.naturalWidth, height: im.naturalHeight });
+            im.onerror = () => resolve({ ...img, width: 0, height: 0 });
+            im.src = img.file;
+          })));
 
-        // Only render up to the first 9 sketches (3x3 layout)
-        sketches.slice(0,9).forEach(img => {
-          const fig = document.createElement('figure'); fig.className='process-item';
-          const image = document.createElement('img'); image.src = img.file; image.alt = img.caption;
-          const wrap = document.createElement('div'); wrap.className = 'thumb-wrap';
-          // Make the thumbnail keyboard-focusable and announceable
-          wrap.tabIndex = 0;
-          wrap.setAttribute('role', 'button');
-          wrap.setAttribute('aria-label', image.alt || img.src || 'Open image');
-          wrap.appendChild(image);
-          fig.appendChild(wrap);
-          sketchesGrid.appendChild(fig);
-        });
+          loaded.forEach(img => {
+              // Force certain files into the final section
+              if(FORCED_FINAL.includes(img.file)){
+                final.push(img);
+                return;
+              }
 
-        // Render up to the first 9 digital items (3x3)
-        digital.slice(0,9).forEach(img => {
-          const fig = document.createElement('figure'); fig.className='process-item';
-          const image = document.createElement('img'); image.src = img.file; image.alt = img.caption;
-          const wrap = document.createElement('div'); wrap.className = 'thumb-wrap';
-          // Make the thumbnail keyboard-focusable and announceable
-          wrap.tabIndex = 0;
-          wrap.setAttribute('role', 'button');
-          wrap.setAttribute('aria-label', image.alt || image.src || 'Open image');
-          wrap.appendChild(image);
-          fig.appendChild(wrap);
-          digitalGrid.appendChild(fig);
-        });
+              // Forced placement (overrides heuristic)
+              let state;
+              if(FORCED_SKETCHES.includes(img.file)) state = 'sketch';
+              else if(FORCED_DIGITAL.includes(img.file)) state = 'digital';
+              else if (overrides[img.file]) state = overrides[img.file];
+              else {
+                // Prefer pixel-width heuristic; fall back to file-size if width unknown
+                if(img.width && img.width > 0) state = (img.width <= PIXEL_WIDTH_THRESHOLD) ? 'sketch' : 'digital';
+                else state = (img.size <= SKETCH_THRESHOLD) ? 'sketch' : 'digital';
+              }
 
-        // Render final project assets (placed below the final banner)
-        const finalGrid = document.getElementById('final-grid');
-        if(finalGrid){
-          finalGrid.innerHTML = '';
+              if(state === 'sketch') sketches.push(img);
+              else digital.push(img);
+          });
+
+          // Only render up to the first 9 sketches (3x3 layout)
+          sketches.slice(0,9).forEach(img => {
+            const fig = document.createElement('figure'); fig.className='process-item';
+            const image = document.createElement('img'); image.src = img.file; image.alt = img.caption;
+            const wrap = document.createElement('div'); wrap.className = 'thumb-wrap';
+            // Make the thumbnail keyboard-focusable and announceable
+            wrap.tabIndex = 0;
+            wrap.setAttribute('role', 'button');
+            wrap.setAttribute('aria-label', image.alt || img.src || 'Open image');
+            wrap.appendChild(image);
+            fig.appendChild(wrap);
+            sketchesGrid.appendChild(fig);
+          });
+
+          // Render up to the first 9 digital items (3x3)
+          digital.slice(0,9).forEach(img => {
+            const fig = document.createElement('figure'); fig.className='process-item';
+            const image = document.createElement('img'); image.src = img.file; image.alt = img.caption;
+            const wrap = document.createElement('div'); wrap.className = 'thumb-wrap';
+            // Make the thumbnail keyboard-focusable and announceable
+            wrap.tabIndex = 0;
+            wrap.setAttribute('role', 'button');
+            wrap.setAttribute('aria-label', image.alt || image.src || 'Open image');
+            wrap.appendChild(image);
+            fig.appendChild(wrap);
+            digitalGrid.appendChild(fig);
+          });
           final.slice(0,9).forEach(img => {
             const fig = document.createElement('figure'); fig.className='process-item';
             const image = document.createElement('img'); image.src = img.file; image.alt = img.caption;
