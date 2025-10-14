@@ -252,5 +252,37 @@
       <iframe id="video-frame" src="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Project demo video"></iframe>
     </div>
   </div>
+  <script>
+const lightbox = document.getElementById('lightbox');
+const lightboxClose = document.getElementById('lightbox-close');
+
+// Open the lightbox
+function openLightbox() {
+  lightbox.setAttribute('aria-hidden', 'false');
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  lightboxClose.focus(); // Move focus to the close button
+}
+
+// Close the lightbox
+function closeLightbox() {
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Event listeners
+lightboxClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox(); // Close when clicking outside the image
+});
+
+// Escape key closes the lightbox
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+    closeLightbox();
+  }
+});
+</script>
 </body>
 </html>
