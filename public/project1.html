@@ -81,145 +81,62 @@
     </div>
 
     <script>
-      // Image metadata (sizes in bytes) - used to auto-classify
       const imagesMeta = [
-        {file:'assets/IMG5.png', caption:'1', size:2763990},
-        // {file:'assets/IMG2.png', caption:'2', size:1020846},
-        {file:'assets/IMG3.png', caption:'3', size:933533},
-        {file:'assets/IMG4.png', caption:'4', size:1336082},
-        {file:'assets/IMG6.png', caption:'5', size:1465588},
-        {file:'assets/IMG7.png', caption:'6', size:1411865},
-        {file:'assets/IMG9.png', caption:'7', size:1087007},
-        {file:'assets/IMG8.png', caption:'8', size:1763282},
-        {file:'assets/IMG1.png', caption:'9', size:537477},
-        // {file:'assets/IMG10.png', caption:'10', size:1074000},
-        {file:'assets/IMG19.png', caption:'11', size:854433},
-        {file:'assets/IMG12.png', caption:'12', size:946658},
-        {file:'assets/IMG13.png', caption:'13', size:642104},
-        {file:'assets/IMG14.png', caption:'14', size:416236},
-        {file:'assets/IMG15.png', caption:'15', size:79804},
-        {file:'assets/IMG16.png', caption:'16', size:239112},
-        {file:'assets/IMG17.png', caption:'17', size:103005},
-        {file:'assets/IMG18.png', caption:'18', size:1334152},
-          {file:'assets/IMG11.png', caption:'19', size:703303},
-          {file:'assets/processimg.png', caption:'process', size:900000}
-      ];
+  { file: 'assets/IMG15.png', caption: '15', size: 79804 },
+  { file: 'assets/IMG16.png', caption: '16', size: 239112 },
+  { file: 'assets/IMG17.png', caption: '17', size: 103005 },
+  { file: 'assets/IMG5.png', caption: '5', size: 2763990 },
+  { file: 'assets/IMG3.png', caption: '3', size: 933533 },
+  { file: 'assets/IMG4.png', caption: '4', size: 1336082 },
+  { file: 'assets/IMG6.png', caption: '6', size: 1465588 },
+  { file: 'assets/IMG7.png', caption: '7', size: 1411865 },
+  { file: 'assets/IMG9.png', caption: '9', size: 1087007 },
+  { file: 'assets/IMG8.png', caption: '8', size: 1763282 },
+  { file: 'assets/IMG1.png', caption: '1', size: 537477 },
+  { file: 'assets/IMG19.png', caption: '19', size: 854433 },
+  { file: 'assets/IMG12.png', caption: '12', size: 946658 },
+  { file: 'assets/IMG13.png', caption: '13', size: 642104 },
+  { file: 'assets/IMG11.png', caption: '11', size: 703303 }
+];
 
-  const OVERRIDES_KEY = 'project1-classifications';
-  const overrides = JSON.parse(localStorage.getItem(OVERRIDES_KEY) || '{}');
+const FORCED_SKETCHES = ['assets/IMG15.png', 'assets/IMG16.png', 'assets/IMG17.png'];
+const FORCED_DIGITAL = ['assets/IMG5.png', 'assets/IMG3.png', 'assets/IMG4.png', 'assets/IMG6.png', 'assets/IMG7.png', 'assets/IMG9.png', 'assets/IMG8.png', 'assets/IMG1.png'];
+const FORCED_FINAL = ['assets/IMG19.png', 'assets/IMG12.png', 'assets/IMG13.png', 'assets/IMG11.png'];
 
+function render() {
   const sketchesGrid = document.getElementById('sketches-grid');
   const digitalGrid = document.getElementById('digital-grid');
+  const finalGrid = document.getElementById('final-grid');
 
-  // classify by heuristic: small files more likely sketches; threshold in bytes
-  const SKETCH_THRESHOLD = 300000; // 300 KB
+  sketchesGrid.innerHTML = '';
+  digitalGrid.innerHTML = '';
+  finalGrid.innerHTML = '';
 
-  // Optional forced classification lists. Use these to explicitly place images
-  // into a section if the heuristic misclassifies them. Leave arrays empty to
-  // use automatic heuristic behavior.
-  const FORCED_SKETCHES = []; // e.g. ['assets/IMG15.png']
-  const FORCED_DIGITAL = [];  // e.g. ['assets/IMG12.png']
-  const FORCED_FINAL = ['assets/IMG11.png','assets/IMG12.png','assets/IMG13.png'];
+  imagesMeta.forEach(img => {
+    const fig = document.createElement('figure');
+    fig.className = 'process-item';
+    const image = document.createElement('img');
+    image.src = img.file;
+    image.alt = img.caption;
+    const wrap = document.createElement('div');
+    wrap.className = 'thumb-wrap';
+    wrap.tabIndex = 0;
+    wrap.setAttribute('role', 'button');
+    wrap.setAttribute('aria-label', image.alt || img.src || 'Open image');
+    wrap.appendChild(image);
+    fig.appendChild(wrap);
 
-      function render() {
-        sketchesGrid.innerHTML = '';
-        digitalGrid.innerHTML = '';
-        // Build arrays for sketches and digital, preserving user overrides
-        const sketches = [];
-        const digital = [];
-        const final = [];
-        imagesMeta.forEach(img => {
-            // Force certain files into the final section
-            if(FORCED_FINAL.includes(img.file)){
-              final.push(img);
-              return;
-            }
+    if (FORCED_SKETCHES.includes(img.file)) {
+      sketchesGrid.appendChild(fig);
+    } else if (FORCED_DIGITAL.includes(img.file)) {
+      digitalGrid.appendChild(fig);
+    } else if (FORCED_FINAL.includes(img.file)) {
+      finalGrid.appendChild(fig);
+    }
+  });
+}
 
-            // Forced placement (overrides heuristic)
-            let state;
-            if(FORCED_SKETCHES.includes(img.file)) state = 'sketch';
-            else if(FORCED_DIGITAL.includes(img.file)) state = 'digital';
-            else state = overrides[img.file] || (img.size <= SKETCH_THRESHOLD ? 'sketch' : 'digital');
-            if(state === 'sketch') sketches.push(img);
-            else digital.push(img);
-        });
-
-        // Only render up to the first 9 sketches (3x3 layout)
-        sketches.slice(0,9).forEach(img => {
-          const fig = document.createElement('figure'); fig.className='process-item';
-          const image = document.createElement('img'); image.src = img.file; image.alt = img.caption;
-          const wrap = document.createElement('div'); wrap.className = 'thumb-wrap';
-          // Make the thumbnail keyboard-focusable and announceable
-          wrap.tabIndex = 0;
-          wrap.setAttribute('role', 'button');
-          wrap.setAttribute('aria-label', image.alt || img.src || 'Open image');
-          wrap.appendChild(image);
-          fig.appendChild(wrap);
-          sketchesGrid.appendChild(fig);
-        });
-
-        // Render up to the first 9 digital items (3x3)
-        digital.slice(0,9).forEach(img => {
-          const fig = document.createElement('figure'); fig.className='process-item';
-          const image = document.createElement('img'); image.src = img.file; image.alt = img.caption;
-          const wrap = document.createElement('div'); wrap.className = 'thumb-wrap';
-          // Make the thumbnail keyboard-focusable and announceable
-          wrap.tabIndex = 0;
-          wrap.setAttribute('role', 'button');
-          wrap.setAttribute('aria-label', image.alt || image.src || 'Open image');
-          wrap.appendChild(image);
-          fig.appendChild(wrap);
-          digitalGrid.appendChild(fig);
-        });
-
-        // Render final project assets (placed below the final banner)
-        const finalGrid = document.getElementById('final-grid');
-        if(finalGrid){
-          finalGrid.innerHTML = '';
-          final.slice(0,9).forEach(img => {
-            const fig = document.createElement('figure'); fig.className='process-item';
-            const image = document.createElement('img'); image.src = img.file; image.alt = img.caption;
-            const wrap = document.createElement('div'); wrap.className = 'thumb-wrap';
-            // Make the thumbnail keyboard-focusable and announceable
-            wrap.tabIndex = 0;
-            wrap.setAttribute('role', 'button');
-            wrap.setAttribute('aria-label', image.alt || image.src || 'Open image');
-            wrap.appendChild(image);
-            fig.appendChild(wrap);
-            finalGrid.appendChild(fig);
-          });
-        }
-      }
-
-      // Normalize and shadows toggles removed from UI. Keep previous preferences (if any) applied silently.
-      (function(){
-        const g1 = document.getElementById('sketches-grid');
-        const g2 = document.getElementById('digital-grid');
-        const normKey = 'project1-normalize';
-        const shadowsKey = 'project1-reduced-shadows';
-        // Apply saved preferences if present
-        try{
-          if(localStorage.getItem(normKey) === 'true'){ if(g1) g1.classList.add('normalized'); if(g2) g2.classList.add('normalized'); }
-          if(localStorage.getItem(shadowsKey) === 'true'){ if(g1) g1.classList.add('reduced-shadows'); if(g2) g2.classList.add('reduced-shadows'); }
-        }catch(e){ /* ignore storage errors */ }
-      })();
-      // Run render and print a diagnostic table to the console so we can review
-      // how each image was classified. This makes it easy to see if sketches
-      // and digital images were flipped by the heuristic.
-      render();
-      try{
-        const diag = imagesMeta.map(img => {
-          const forced = FORCED_FINAL.includes(img.file) ? 'final' : (FORCED_SKETCHES.includes(img.file) ? 'sketch' : (FORCED_DIGITAL.includes(img.file) ? 'digital' : 'auto'));
-          const auto = img.size <= SKETCH_THRESHOLD ? 'sketch' : 'digital';
-          return { file: img.file, size: img.size, forced: forced, auto: auto, override: !!overrides[img.file] };
-        });
-        console.table(diag);
-      }catch(e){/* ignore console errors */}
-      console.log('Classification Results:', imagesMeta.map(img => {
-        const forced = FORCED_FINAL.includes(img.file) ? 'final' : (FORCED_SKETCHES.includes(img.file) ? 'sketch' : (FORCED_DIGITAL.includes(img.file) ? 'digital' : 'auto'));
-        const auto = img.size <= SKETCH_THRESHOLD ? 'sketch' : 'digital';
-        return { file: img.file, size: img.size, forced: forced, auto: auto, override: !!overrides[img.file] };
-      }));
+render();
     </script>
   </main>
   <footer class="site-footer">
