@@ -272,6 +272,7 @@
   padding: 0.5rem 0;
   display: flex;
   flex-direction: row;
+  gap: 2.5rem; /* add space between the two repeating tracks so end/start items don't butt up */
 }
 .skills-track {
   display: flex;
@@ -822,11 +823,13 @@ body {
 }
 .projects-grid {
   display: grid;
-  /* show two columns so projects form two rows of two on wide screens */
-  grid-template-columns: repeat(2, 1fr);
+  /* Use two fixed-width columns and center the grid so the project cards sit
+     centered in the container rather than stretched to the left edge. The
+     project cards themselves already limit their width to 320px. */
+  grid-template-columns: repeat(2, minmax(0, 320px));
+  justify-content: center; /* center grid columns within the parent */
   gap: 2rem;
   margin-top: 1.5rem;
-  width: 100%;
 }
 .project-card {
   background: #232526;
