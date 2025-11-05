@@ -822,7 +822,8 @@ body {
 }
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* show two columns so projects form two rows of two on wide screens */
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-top: 1.5rem;
   width: 100%;
