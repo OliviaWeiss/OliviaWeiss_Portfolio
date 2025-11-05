@@ -504,6 +504,19 @@
   #development-grid { grid-template-columns: 1fr; gap: 0.125rem; }
 }
 
+/* Force refinement grid to 3 columns (match other process galleries) */
+#refinement-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0; /* thumbnails flush */
+}
+@media (max-width: 900px) {
+  #refinement-grid { grid-template-columns: repeat(2, 1fr); gap: 0.125rem; }
+}
+@media (max-width: 600px) {
+  #refinement-grid { grid-template-columns: 1fr; gap: 0.125rem; }
+}
+
 .scrollytelling / progressive reveal layout */
 .process-item {
   display:flex;
