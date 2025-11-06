@@ -659,6 +659,29 @@
   flex-direction: column;
   gap: 2.2rem;
 }
+/* Back arrow on project pages */
+.back-arrow {
+  position: fixed;
+  left: 1rem;
+  top: 4.4rem; /* below the fixed navbar */
+  z-index: 120;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.7rem;
+  background: rgba(30,30,30,0.85);
+  color: #eaeaea;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.back-arrow:hover { transform: translateY(-2px); }
+.back-arrow svg { width: 18px; height: 18px; display: inline-block; vertical-align: middle }
+@media (max-width: 700px) {
+  .back-arrow { top: 5.2rem; left: 0.6rem; padding: 0.35rem 0.6rem }
+}
 /* Featured image at top of project pages */
 .project-feature {
   /* make the featured area full-bleed so all project pages align visually */
