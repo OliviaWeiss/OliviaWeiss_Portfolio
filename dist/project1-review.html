@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Project 1 — Image Review</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body{padding:2rem;font-family:Inter, Arial, sans-serif;background:#0f1112;color:#eaeaea}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+    .card{background:#181a1b;padding:0.6rem;border-radius:8px;display:flex;flex-direction:column;gap:0.6rem}
+    .thumb{width:100%;height:160px;object-fit:cover;border-radius:6px;background:#111}
+    .meta{font-size:0.9rem;color:#bdbdbd}
+    .btns{display:flex;gap:0.4rem}
+    button{flex:1;padding:0.5rem;border-radius:6px;border:1px solid #2b2c2d;background:#232526;color:#eaeaea;cursor:pointer}
+    button.active{outline:3px solid #8f9ba8}
+    .export{margin:1rem 0;padding:0.6rem 0.9rem;border-radius:8px;background:#8f9ba8;border:none;color:#081018;cursor:pointer}
+  </style>
+</head>
+<body>
+    <a href="index.html#portfolio" class="back-arrow" aria-label="Back to projects">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </a>
+  <h1>Project 1 — Image Review</h1>
+  <p>Click to mark each image as <strong>Sketch</strong> or <strong>Digital</strong>. Use Export to download your selections.</p>
+
+  <div class="grid" id="grid"></div>
+
+  <button class="export" id="export">Export selections (download JSON)</button>
+
+  <script>
+    // Image metadata (generated from project assets)
+    const images = [
+      {file:'assets/IMG1.png', width:1653, height:1021, size:2763990},
+      {file:'assets/IMG2.png', width:1773, height:379, size:1020846},
+      {file:'assets/IMG3.png', width:1144, height:465, size:933533},
+      {file:'assets/IMG4.png', width:1743, height:494, size:1336082},
+      {file:'assets/IMG5.png', width:1504, height:650, size:1465588},
+      {file:'assets/IMG6.png', width:910, height:985, size:1411865},
+      {file:'assets/IMG7.png', width:683, height:858, size:1087007},
+      {file:'assets/IMG8.png', width:1185, height:814, size:1763282},
+      {file:'assets/IMG9.png', width:1070, height:325, size:537477},
+      {file:'assets/IMG10.png', width:1021, height:584, size:1074000},
+      {file:'assets/IMG11.png', width:935, height:743, size:854433},
+      {file:'assets/IMG12.png', width:869, height:754, size:946658},
+      {file:'assets/IMG13.png', width:1111, height:546, size:642104},
+      {file:'assets/IMG14.png', width:1700, height:971, size:416236},
+      {file:'assets/IMG15.png', width:537, height:325, size:79804},
+      {file:'assets/IMG16.png', width:547, height:428, size:239112},
+      {file:'assets/IMG17.png', width:522, height:307, size:103005},
+      {file:'assets/IMG18.png', width:1042, height:773, size:1334152},
+      {file:'assets/IMG19.png', width:1033, height:912, size:703303}
+    ];
+
+    const grid = document.getElementById('grid');
+
+    const saved = JSON.parse(localStorage.getItem('project1-tags')||'{}');
+
+    images.forEach(img=>{
+      const card = document.createElement('div'); card.className='card';
+      const image = document.createElement('img'); image.className='thumb'; image.src=img.file; image.alt=img.file;
+      const meta = document.createElement('div'); meta.className='meta'; meta.textContent = `${img.file} — ${img.width}×${img.height} — ${(img.size/1024|0)} KB`;
+      const btns = document.createElement('div'); btns.className='btns';
+      const sk = document.createElement('button'); sk.textContent='Sketch';
+      const di = document.createElement('button'); di.textContent='Digital';
+
+      const key = img.file;
+      function setState(state){
+        if(state==='Sketch'){ sk.classList.add('active'); di.classList.remove('active'); }
+        else if(state==='Digital'){ di.classList.add('active'); sk.classList.remove('active'); }
+        else { di.classList.remove('active'); sk.classList.remove('active'); }
+        saved[key]=state; localStorage.setItem('project1-tags', JSON.stringify(saved));
+      }
+
+      sk.addEventListener('click', ()=> setState('Sketch'));
+      di.addEventListener('click', ()=> setState('Digital'));
+
+      if(saved[key]) setState(saved[key]);
+
+      btns.appendChild(sk); btns.appendChild(di);
+      card.appendChild(image); card.appendChild(meta); card.appendChild(btns);
+      grid.appendChild(card);
+    });
+
+    document.getElementById('export').addEventListener('click', ()=>{
+      const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(saved, null, 2));
+      const a = document.createElement('a'); a.href = dataStr; a.download = 'project1-image-tags.json'; document.body.appendChild(a); a.click(); a.remove();
+    });
+  </script>
+</body>
+</html>
+
