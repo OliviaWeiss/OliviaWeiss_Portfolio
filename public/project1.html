@@ -68,15 +68,7 @@
           </div>
         </div>
         <div class="process-gallery" id="digital-grid"></div>
-        <!-- Full-bleed banner for Final Project -->
-        <div class="process-banner">
-          <div class="process-banner-inner">
-            <h3>Final Project</h3>
-            <p class="process-banner-desc">This final project uses augmented reality to create an interactive and meaningful experience, blending physical and digital elements to tell a story and engage users in a more personal way.</p>
-          </div>
-        </div>
-        <!-- Final project gallery (specific assets placed here) -->
-        <div class="process-gallery" id="final-grid"></div>
+        <!-- Final Project section removed per request -->
       </section>
     </div>
 
@@ -107,7 +99,6 @@
   { file: 'assets/finaldig2.png', caption: 'Final Digital 2', size: 0 },
   { file: 'assets/finaldig3.png', caption: 'Final Digital 3', size: 0 },
 
-  { file: 'assets/IMG19.png', caption: '19', size: 854433 }
 ];
 
 const FORCED_SKETCHES = [
@@ -115,16 +106,14 @@ const FORCED_SKETCHES = [
   
 ];
 const FORCED_DIGITAL = ['assets/digwork1.png','assets/digwork2.png','assets/digwork3.png','assets/digwork4.png','assets/digwork5.png','assets/digwork6.png','assets/finaldig1.png','assets/finaldig2.png','assets/finaldig3.png'];
-const FORCED_FINAL = ['assets/project1img.png','assets/IMG19.png'];
+// Final project section removed — no FORCED_FINAL array needed.
 
 function render() {
   const sketchesGrid = document.getElementById('sketches-grid');
   const digitalGrid = document.getElementById('digital-grid');
-  const finalGrid = document.getElementById('final-grid');
 
   sketchesGrid.innerHTML = '';
   digitalGrid.innerHTML = '';
-  finalGrid.innerHTML = '';
 
   imagesMeta.forEach(img => {
     const fig = document.createElement('figure');
@@ -144,8 +133,6 @@ function render() {
       sketchesGrid.appendChild(fig);
     } else if (FORCED_DIGITAL.includes(img.file)) {
       digitalGrid.appendChild(fig);
-    } else if (FORCED_FINAL.includes(img.file)) {
-      finalGrid.appendChild(fig);
     }
   });
 }
