@@ -26,6 +26,9 @@
       <img src="assets/googledoodle.png" alt="Google doodle screenshot" class="featured-img">
     </div>
     <h1>Google doodle</h1>
+    <div class="project-actions">
+      <a class="btn btn-visit" href="https://youtu.be/yw2jdlqTCCU" data-video="https://www.youtube.com/embed/yw2jdlqTCCU?rel=0&modestbranding=1" target="_blank" rel="noopener noreferrer">Visit project</a>
+    </div>
     <section>
       <h2>Design Statement</h2>
       <p>The Canadian Space Rover represents the theme of journey and achievement.  These themes are represented by the process of roaming around, collecting letters and opening the door. This journey is made to metaphorically represent the journey and goals of the Canadian lunar rover. This theme is brought to life through my Google Doodle by using a space background, the moon, a rover, google letters, and a door that opens to new knowledge/learnings. These visual choices signify exploration, progression, and opportunity, using analogy, symbolism, and allegory.<br><br>
@@ -252,6 +255,13 @@ The user of the Google Doodle will go through the process of exploration as they
       });
     })();
   </script>
+  <!-- Video modal for project demo (added so Visit button opens in-page like Project 1) -->
+  <div id="video-modal" class="video-modal" aria-hidden="true">
+    <div class="video-modal-content" role="dialog" aria-modal="true">
+      <button class="video-close" id="video-close" aria-label="Close video">✕</button>
+      <iframe id="video-frame" src="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Project demo video"></iframe>
+    </div>
+  </div>
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-info">

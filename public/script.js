@@ -166,10 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const videoModal = document.getElementById('video-modal');
   const videoFrame = document.getElementById('video-frame');
   const videoClose = document.getElementById('video-close');
-  const VIDEO_SRC = 'https://www.youtube.com/embed/1UZvK_0lNFE?rel=0&modestbranding=1';
+  const DEFAULT_VIDEO_SRC = 'https://www.youtube.com/embed/1UZvK_0lNFE?rel=0&modestbranding=1';
 
-  function openVideoModal(){
-    if(videoFrame) videoFrame.src = VIDEO_SRC + '&autoplay=1';
+  function openVideoModal(src){
+    const s = src || DEFAULT_VIDEO_SRC;
+    if(videoFrame) videoFrame.src = s + (s.includes('?') ? '&autoplay=1' : '?autoplay=1');
     if(videoModal){ videoModal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
     if(videoClose) videoClose.focus();
   }
@@ -177,7 +178,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if(videoFrame) videoFrame.src = '';
     if(videoModal){ videoModal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
   }
-  if(visitBtn){ visitBtn.addEventListener('click', function(e){ e.preventDefault(); openVideoModal(); }); }
+  if(visitBtn){
+    visitBtn.addEventListener('click', function(e){
+      // If the page has an in-page video modal, intercept and open it with an optional per-button data-video
+      if (!videoModal) return; // allow the anchor to work as a normal link
+      e.preventDefault();
+      const dataVideo = this.dataset && this.dataset.video ? this.dataset.video : null;
+      openVideoModal(dataVideo || DEFAULT_VIDEO_SRC);
+    });
+  }
   if(videoClose) videoClose.addEventListener('click', closeVideoModal);
   if(videoModal) videoModal.addEventListener('click', function(e){ if(e.target === videoModal) closeVideoModal(); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && videoModal && videoModal.getAttribute('aria-hidden') === 'false') closeVideoModal(); });
