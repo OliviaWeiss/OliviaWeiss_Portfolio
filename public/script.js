@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Select resume anchors across pages (common filenames and optional data attributes)
   const resumeAnchors = Array.from(document.querySelectorAll(
-    'a[data-resume-modal], a#resume-link, a[href$="OliviaWeiss_Resume_2025.pdf"], a[href$="Olivia_Weiss_Resume.pdf"], a[href$="OliviaWeiss_Resume.pdf"]'
+    'a[data-resume-modal], a#resume-link, a[href$="OliviaWeiss_Resume_2025.pdf"]'
   ));
 
   resumeAnchors.forEach(a => {
