@@ -5,8 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Cover Design | Olivia Weiss Portfolio</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
+  <!-- Parallax Background Layers -->
+  <div class="parallax-container">
+    <div class="parallax-layer parallax-bg"></div>
+    <div class="parallax-layer parallax-shapes">
+      <div class="shape shape-circle"></div>
+      <div class="shape shape-square"></div>
+      <div class="shape shape-triangle"></div>
+    </div>
+    <div class="parallax-layer parallax-gradient"></div>
+  </div>
+  
   <nav class="navbar">
   <div class="nav-logo"><a href="index.html#hero">Olivia Weiss</a></div>
     <ul class="nav-links">
@@ -26,170 +39,131 @@
       <img src="assets/headsup.png" alt="Book cover design screenshot" class="featured-img">
     </div>
     <h1>Book Cover Design</h1>
+
+    <!-- Overview Section -->
     <section>
-  <h2>Design Statement</h2>
-  <p>The book Heads-Up Baseball is aimed at athletes and coaches and covers mental toughness, confidence and self belief, emotional control, and process oriented thinking. These themes are represented with a blueprint of a baseball diamond, signifying strategic planning, navigating the game, control, and the connection between physical and mental, using metaphors, analogy, and allusion. The blueprint of a baseball diamond can serve as a metaphor for the mental strategy part of the game, as the book provides a mental blueprint to help success on the field. The blueprint also serves as an analogy for how mental preparation in baseball is crucial just like with a traditional house blueprint. Without a thought out plan things could crash and fall. The final trope used was allusion and that was brought again through the blueprint design alluding  to the concept of building success. This makes an association of how athletes build their skills and mindsets over time, just like how buildings take shape over time from their blueprints.</p>
-    </section>
-    <section>
-      <h2>Key Features</h2>
-      <ul>
-        <li><strong>Metaphorical Visualization</strong>: The blueprint of a baseball diamond represents mental preparation, discipline, and strategic thinking.</li>
-        <li><strong>Blueprint Aesthetic</strong>: Technical drawing style with grids, measurements, and linework symbolizing structure and planning.</li>
-        <li><strong>Color Psychology</strong>: Calming shades of blue and white evoke clarity, focus, and composure under pressure.</li>
-        <li><strong>Typography System</strong>: Geometric, architectural typefaces reinforce the precision and structure of blueprints.</li>
-      </ul>
-    </section>
-    <section>
-      <h2>Process Work</h2>
-      <p>The process began with sketches to explore composition and concept, then moved into digital exploration to test interaction, layout, and final visual language.</p>
+      <h2>Overview</h2>
+      <p class="design-paragraph">A book cover design for Heads-Up Baseball that uses a baseball diamond
+blueprint as a visual metaphor for mental strategy, discipline, and
+preparation. The design transforms technical drawing aesthetics into a
+symbolic framework for mental toughness, confidence, and process-oriented
+thinking in sport.</p>
     </section>
 
-    <!-- Full-bleed banner for Sketches -->
-    <div class="process-banner">
-      <div class="process-banner-inner">
-        <h3>Sketches</h3>
-        <p class="process-banner-desc">Rapid ideation and thumbnail sketches to capture composition, hierarchy, and visual metaphor before committing to digital drafts.</p>
+    <!-- What/Who/Why Grid -->
+    <section>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>What</h3>
+          <p>A book cover featuring a blueprint of a baseball diamond, using technical drawing aesthetics to symbolize the strategic and mental preparation required for success in baseball. The design employs metaphor, analogy, and allusion to connect physical and mental aspects of the game.</p>
+        </div>
+        <div class="info-card">
+          <h3>Who</h3>
+          <p>Designed for athletes, coaches, and baseball enthusiasts interested in the mental side of the game. The cover communicates seriousness and strategic depth, appealing to those seeking to build their skills and mindsets with intentional preparation.</p>
+        </div>
+        <div class="info-card">
+          <h3>Why</h3>
+          <p>To visually communicate that mental preparation is as crucial as physical skill, using the blueprint metaphor to suggest that success requires a well-thought-out plan. The design makes the abstract concept of mental strategy tangible and immediately recognizable.</p>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div id="process-sections">
-      <section class="process-block">
-        <div class="process-gallery" id="sketches-grid">
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 1">
-              <img src="assets/sketch1.png" alt="Sketch 1">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 2">
-              <img src="assets/sketch2.png" alt="Sketch 2">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 3">
-              <img src="assets/sketch3.png" alt="Sketch 3">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 4">
-              <img src="assets/sketch4.png" alt="Sketch 4">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 5">
-              <img src="assets/sketch5.png" alt="Sketch 5">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 6">
-              <img src="assets/sketch6.png" alt="Sketch 6">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 7">
-              <img src="assets/sketch7.png" alt="Sketch 7">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 8">
-              <img src="assets/sketch8.png" alt="Sketch 8">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 9">
-              <img src="assets/sketch9.png" alt="Sketch 9">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 10">
-              <img src="assets/sketch10.png" alt="Sketch 10">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 11">
-              <img src="assets/sketch11.png" alt="Sketch 11">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 12">
-              <img src="assets/sketch12.png" alt="Sketch 12">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 14">
-              <img src="assets/sketch14.png" alt="Sketch 14">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 15">
-              <img src="assets/sketch15.png" alt="Sketch 15">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 17">
-              <img src="assets/sketch17.png" alt="Sketch 17">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 19">
-              <img src="assets/sketch19.png" alt="Sketch 19">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 20">
-              <img src="assets/sketch20.png" alt="Sketch 20">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 21">
-              <img src="assets/sketch21.png" alt="Sketch 21">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 22">
-              <img src="assets/sketch22.png" alt="Sketch 22">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 23">
-              <img src="assets/sketch23.png" alt="Sketch 23">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Sketch 24">
-              <img src="assets/sketch24.png" alt="Sketch 24">
-            </div>
-          </figure>
-        </div>
-      </section>
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
 
-      <section class="process-block">
-        <!-- Full-bleed banner for Digital Exploration -->
-        <div class="process-banner">
-          <div class="process-banner-inner">
-            <h3>Digital Exploration</h3>
-            <p class="process-banner-desc">Digital mockups and exploratory compositions—testing type systems, layout grids, and color relationships for the cover design.</p>
-          </div>
+    <!-- Problem Section with side image -->
+    <section class="scroll-reveal">
+      <div class="two-column-section">
+        <div class="text-column">
+          <h2>Problem / Opportunity</h2>
+          <p>This project explores how visual metaphor can make abstract concepts like mental toughness and strategic thinking feel concrete and actionable. The challenge was creating a cover that honors the book's focus on the mental game while remaining accessible and engaging for its audience.</p>
+          <p>By using a baseball diamond blueprint, the design creates an immediate association: just as buildings require careful planning, athletic success requires mental preparation and strategic thinking.</p>
         </div>
-        <div class="process-gallery" id="digital-grid">
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Digital 1">
-              <img src="assets/Digital1.png" alt="Digital 1">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Digital 2">
-              <img src="assets/Digital2.png" alt="Digital 2">
-            </div>
-          </figure>
-          <figure class="process-item">
-            <div class="thumb-wrap" tabindex="0" role="button" aria-label="Digital 3">
-              <img src="assets/Digital3.png" alt="Digital 3">
-            </div>
-          </figure>
+        <div class="image-column">
+          <img src="assets/headsup.png" alt="Blueprint design concept">
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <!-- Key Features as Cards -->
+    <section class="scroll-reveal">
+      <h2>Key Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📐</div>
+          <h3>Metaphorical Visualization</h3>
+          <p>The blueprint of a baseball diamond serves as a metaphor for mental preparation, discipline, and strategic thinking, representing the "mental blueprint" for success.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏗️</div>
+          <h3>Blueprint Aesthetic</h3>
+          <p>Technical drawing style with grids, measurements, and linework reinforces themes of structure, planning, and the intentional building of skills over time.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💙</div>
+          <h3>Color Psychology</h3>
+          <p>Calming shades of blue and white evoke clarity, focus, and composure under pressure, essential mental qualities for athletic performance.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✏️</div>
+          <h3>Typography System</h3>
+          <p>Geometric, architectural typefaces reinforce the precision and structure of blueprints, creating a cohesive visual language that supports the metaphor.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <!-- Process and Exploration Section -->
+    <section class="scroll-reveal">
+      <h2>Process and Exploration</h2>
+      <div class="process-exploration-grid">
+        <div class="process-item">
+          <img src="assets/sketch1.png" alt="Initial sketch concepts">
+          <p class="caption">Inital sketch </p>
+        </div>
+        <div class="process-item">
+          <img src="assets/sketch2.png" alt="Diamond layout variations">
+          <p class="caption">Developing on ideas</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/sketch20.png" alt="Typography experiments">
+          <p class="caption">Further development of ideas</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/sketch19.png" alt="Digital blueprint exploration">
+          <p class="caption">More ideation</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/sketch22.png" alt="Color and grid refinement">
+          <p class="caption">Final concept sketch</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/Digital2.png" alt="Final design composition">
+          <p class="caption">Digital exploration of final design composition</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <!-- Reflection Section -->
+    <!-- <section class="scroll-reveal">
+      <h2>Reflection</h2>
+      <p>This project taught me how visual metaphor can transform abstract ideas into concrete, recognizable forms. The challenge was ensuring the blueprint concept felt intentional rather than decorative, making the connection between planning and mental preparation clear without over-explaining. I learned the importance of consistency in visual language and how thoughtful design choices can create layers of meaning that resonate with the intended audience.</p>
+    </section> -->
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <script>
+      // Removed per user request
+    </script>
   </main>
   <footer class="site-footer">
     <div class="footer-content">

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Text Animation - Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0e14;
+      color: #e4e8ed;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Spacer sections to enable scroll */
+    .spacer {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #8f9ba8;
+      background: linear-gradient(180deg, #0a0e14 0%, #141a24 100%);
+    }
+
+    /* Main pinned text container */
+    .text-animation-section {
+      height: 400vh; /* Total scroll distance: 4x viewport height */
+      position: relative;
+    }
+
+    .text-pin-container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Text wrapper - holds all text lines */
+    .text-wrapper {
+      max-width: 900px;
+      padding: 0 2rem;
+      position: relative;
+      height: 200px; /* Fixed height to prevent layout shift */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Individual text lines (only one visible at a time) */
+    .text-line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #e4e8ed;
+      /* Initial state for animation */
+      will-change: opacity, transform;
+    }
+
+    /* Emphasized words */
+    .text-line .highlight {
+      font-weight: 600;
+      color: #ffffff;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Subtle background gradient effect */
+    .bg-gradient {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+      opacity: 0.5;
+      pointer-events: none;
+      filter: blur(60px);
+    }
+
+    /* Progress indicator (optional) */
+    .scroll-progress {
+      position: fixed;
+      top: 50%;
+      right: 2rem;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      z-index: 100;
+    }
+
+    .progress-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(143, 155, 168, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .progress-dot.active {
+      background: #667eea;
+      transform: scale(1.5);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .text-line {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+        padding: 0 1rem;
+      }
+      
+      .text-wrapper {
+        padding: 0 1rem;
+        height: 150px;
+      }
+
+      .scroll-progress {
+        right: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro spacer -->
+  <section class="spacer">
+    <p>Scroll down to see the animation</p>
+  </section>
+
+  <!-- Main pinned text animation section -->
+  <section class="text-animation-section">
+    <div class="text-pin-container">
+      <div class="bg-gradient"></div>
+      <div class="text-wrapper">
+        <!-- Text lines - only one visible at a time -->
+        <div class="text-line" data-line="1">
+          I design experiences that feel <span class="highlight">effortless</span>
+        </div>
+        <div class="text-line" data-line="2">
+          Focused on <span class="highlight">clarity</span> and <span class="highlight">empathy</span>
+        </div>
+        <div class="text-line" data-line="3">
+          Creating interfaces that <span class="highlight">empower</span> users
+        </div>
+        <div class="text-line" data-line="4">
+          Design is about how it makes people <span class="highlight">feel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scroll progress indicator -->
+  <div class="scroll-progress">
+    <div class="progress-dot" data-dot="1"></div>
+    <div class="progress-dot" data-dot="2"></div>
+    <div class="progress-dot" data-dot="3"></div>
+    <div class="progress-dot" data-dot="4"></div>
+  </div>
+
+  <!-- Outro spacer -->
+  <section class="spacer">
+    <p>Continue scrolling</p>
+  </section>
+
+  <!-- GSAP and ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <script>
+    // Register GSAP ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Configuration
+    const TOTAL_LINES = 4;
+    const VERTICAL_OFFSET = 40; // px to move during fade transitions
+    const ANIMATION_EASE = 'power2.inOut';
+
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', () => {
+      const textLines = document.querySelectorAll('.text-line');
+      const progressDots = document.querySelectorAll('.progress-dot');
+      
+      // Pin the text container while scrolling through the entire section
+      // The section has height: 400vh, so it will be pinned for 4 viewport heights of scroll
+      ScrollTrigger.create({
+        trigger: '.text-animation-section',
+        start: 'top top',           // Pin when section top hits viewport top
+        end: 'bottom bottom',        // Unpin when section bottom hits viewport bottom
+        pin: '.text-pin-container',  // Element to pin
+        pinSpacing: true,            // Maintain spacing
+        markers: false,              // Set to true for debugging
+        anticipatePin: 1
+      });
+
+      // Animate each text line
+      // Each line gets its own scroll range within the pinned section
+      textLines.forEach((line, index) => {
+        const lineNumber = index + 1;
+        
+        // Calculate scroll progress ranges for this line
+        // Example for 4 lines over 400vh:
+        // Line 1: 0% - 25% (0vh - 100vh)
+        // Line 2: 25% - 50% (100vh - 200vh)
+        // Line 3: 50% - 75% (200vh - 300vh)
+        // Line 4: 75% - 100% (300vh - 400vh)
+        const startPercent = ((index) / TOTAL_LINES) * 100;
+        const endPercent = ((index + 1) / TOTAL_LINES) * 100;
+        
+        // Create a timeline for this text line
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.text-animation-section',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1, // Smooth scrubbing, takes 1 second to catch up
+            onUpdate: (self) => {
+              // Update progress dots based on scroll progress
+              const progress = self.progress * 100;
+              if (progress >= startPercent && progress < endPercent) {
+                progressDots.forEach(dot => dot.classList.remove('active'));
+                progressDots[index]?.classList.add('active');
+              }
+            }
+          }
+        });
+
+        // Animation sequence for each line:
+        // 1. Fade in from below (during first 1/3 of line's range)
+        // 2. Stay visible (middle 1/3)
+        // 3. Fade out upward (final 1/3)
+        
+        // Starting state (invisible, below)
+        gsap.set(line, {
+          opacity: 0,
+          y: VERTICAL_OFFSET
+        });
+
+        // Calculate keyframe positions within the timeline
+        const fadeInStart = startPercent / 100;
+        const fadeInEnd = (startPercent + ((endPercent - startPercent) * 0.3)) / 100;
+        const fadeOutStart = (startPercent + ((endPercent - startPercent) * 0.7)) / 100;
+        const fadeOutEnd = endPercent / 100;
+
+        // Fade in: Move from below (y: 40) to center (y: 0) and become fully visible
+        tl.to(line, {
+          opacity: 1,
+          y: 0,
+          ease: ANIMATION_EASE,
+          duration: fadeInEnd - fadeInStart
+        }, fadeInStart);
+
+        // Hold visible state
+        tl.to(line, {
+          opacity: 1,
+          y: 0,
+          duration: fadeOutStart - fadeInEnd
+        }, fadeInEnd);
+
+        // Fade out: Move upward (y: -40) and become invisible
+        tl.to(line, {
+          opacity: 0,
+          y: -VERTICAL_OFFSET,
+          ease: ANIMATION_EASE,
+          duration: fadeOutEnd - fadeOutStart
+        }, fadeOutStart);
+      });
+
+      // Initialize first dot as active
+      progressDots[0]?.classList.add('active');
+
+      console.log('Scroll text animation initialized with', TOTAL_LINES, 'text lines');
+    });
+  </script>
+
+</body>
+</html>

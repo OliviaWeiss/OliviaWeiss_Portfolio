@@ -5,8 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connect: Circuits and Interactions | Olivia Weiss Portfolio</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
+  <!-- Parallax Background Layers -->
+  <div class="parallax-container">
+    <div class="parallax-layer parallax-bg"></div>
+    <div class="parallax-layer parallax-shapes">
+      <div class="shape shape-circle"></div>
+      <div class="shape shape-square"></div>
+      <div class="shape shape-triangle"></div>
+    </div>
+    <div class="parallax-layer parallax-gradient"></div>
+  </div>
+  
   <nav class="navbar">
   <div class="nav-logo"><a href="index.html#hero">Olivia Weiss</a></div>
     <ul class="nav-links">
@@ -26,112 +39,135 @@
       <img src="assets/circuts.png" alt="Circuits project image" class="featured-img">
     </div>
     <h1>Connect: Circuits and Interactions</h1>
-    <section>
-  <h2>Design Statement</h2>
-  <p>This project explored the integration of conductive materials and circuits into real-world applications. Through hands-on experimentation, I developed a deeper understanding of circuits and applied them to create a wearable design that pushes beyond the concepts learned in weekly activities.
 
-Throughout the design process, key principles guided my work. Functionality ensured that the circuits were integrated and performed reliably. Balance contributed to both the visual and structural stability of our designs, while emphasis and hierarchy helped highlight important interactive elements. Lastly, unity and harmony brought all elements together into a cohesive and visually compelling outcome.</p>
-    </section>
+    <!-- Overview Section -->
     <section>
+      <h2>Overview</h2>
+      <p class="design-paragraph">This project explored the integration of conductive materials and circuits
+into real-world applications. Through hands-on experimentation, I developed a
+deeper understanding of circuits and applied them to create a wearable design
+that pushes beyond the concepts learned in weekly activities.</p>
+      <p class="design-paragraph">Throughout the design process, key principles guided my work. Functionality
+ensured that the circuits were integrated and performed reliably. Balance
+contributed to both the visual and structural stability of our designs, while
+emphasis and hierarchy helped highlight important interactive elements. Lastly,
+unity and harmony brought all elements together into a cohesive and visually
+compelling outcome.</p>
+    </section>
+
+    <!-- What/Who/Why Grid -->
+    <section>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>What</h3>
+          <p>A wearable design project that integrates conductive materials and circuits into fabric, creating an interactive embroidered skirt that responds to user interaction through embedded electronics.</p>
+        </div>
+        <div class="info-card">
+          <h3>Who</h3>
+          <p>Designed for audiences interested in the intersection of fashion, technology, and interaction design, demonstrating how circuits can be seamlessly woven into wearable art and functional garments.</p>
+        </div>
+        <div class="info-card">
+          <h3>Why</h3>
+          <p>To explore how conductive materials can enhance wearables through interactivity, pushing the boundaries of traditional garment design while maintaining aesthetic quality and functional performance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <!-- Problem Section with side image -->
+    <section class="scroll-reveal">
+      <div class="two-column-section">
+        <div class="text-column">
+          <h2>Problem / Opportunity</h2>
+          <p>Traditional garments are static. This project investigates how embedding circuits and conductive materials into fabric can create wearables that respond to user interaction, adding a layer of interactivity to fashion design.</p>
+          <p>The challenge was to integrate technology invisibly, making the circuits functional while maintaining the aesthetic and structural integrity of the garment through precise embroidery techniques.</p>
+        </div>
+        <div class="image-column">
+          <img src="assets/skirt6.JPG" alt="Interactive embroidered skirt">
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <!-- Key Features as Cards -->
+    <section class="scroll-reveal">
       <h2>Key Features</h2>
-      <ul>
-        <li>Interactivity – circuits respond seamlessly to user interaction.</li>
-        <li>Material Integration – conductive thread and fabric were embedded so subtly that they become invisible within the design.</li>
-        <li>Embroidery – precise stitching elevated both the craftsmanship and the visual appeal, reinforcing the design without revealing the circuitry.</li>
-      </ul>
-    </section>
-    <section>
-      <h2>Process Work</h2>
-      <p>The design process began with experiments in materials and circuits before moving into garment development and refined embroidery techniques. Below are highlights from initial exploration through to skirt development.</p>
-      <!-- Full-bleed banner for Initial Exploration -->
-      <div class="process-banner">
-        <div class="process-banner-inner">
-          <h3>Initial Exploration</h3>
-          <p class="process-banner-desc">Early sketches, material tests, and small circuit prototypes used to validate interaction patterns and material choices.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Interactivity</h3>
+          <p>Circuits respond seamlessly to user interaction, creating an engaging and responsive wearable experience.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧵</div>
+          <h3>Material Integration</h3>
+          <p>Conductive thread and fabric were embedded so subtly that they become invisible within the design, maintaining aesthetic integrity.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3>Precision Embroidery</h3>
+          <p>Precise stitching elevated both the craftsmanship and the visual appeal, reinforcing the design without revealing the circuitry.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Unity & Harmony</h3>
+          <p>All elements (functionality, balance, emphasis, and hierarchy) work together to create a cohesive and visually compelling outcome.</p>
         </div>
       </div>
-  <div class="process-gallery" id="sketches-grid">
-        <figure class="process-item">
-          <div class="thumb-wrap" tabindex="0" role="button" aria-label="Initial process 1">
-            <img src="assets/initalprocess1.png" alt="Initial process 1">
-          </div>
-        </figure>
-        <figure class="process-item">
-          <div class="thumb-wrap" tabindex="0" role="button" aria-label="Initial process 2">
-            <img src="assets/initalprocess2.png" alt="Initial process 2">
-          </div>
-        </figure>
-        <figure class="process-item">
-          <div class="thumb-wrap" tabindex="0" role="button" aria-label="Initial process 3">
-            <img src="assets/initalprocess3.png" alt="Initial process 3">
-          </div>
-        </figure>
-      </div>
+    </section>
 
-      <!-- Full-bleed banner for Skirt Development -->
-      <div class="process-banner">
-        <div class="process-banner-inner">
-          <h3>Skirt Development</h3>
-          <p class="process-banner-desc">Prototype garments, embroidery trials, and final integration of conductive thread into the skirt design.</p>
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+    <!-- Process and Exploration Section -->
+    <section class="scroll-reveal">
+      <h2>Process and Exploration</h2>
+      <div class="process-exploration-grid">
+        <div class="process-item">
+          <img src="assets/initalprocess1.png" alt="Initial process 1">
+          <p class="caption">Research into connecting circuits</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/initalprocess2.png" alt="Initial process 2">
+          <p class="caption">Further development of circuit integration. Sketches and physical prototypes</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/initalprocess3.png" alt="Initial process 3">
+          <p class="caption">Inital design for the embroidered pattern</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/skirt1.png" alt="Skirt development 1">
+          <p class="caption">Embroidery layout</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/circuts.png" alt="Skirt development 2">
+          <p class="caption">Final embroidery integration</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/IMG_6313.jpg" alt="Art show exhibition">
+          <p class="caption">Embroidered skirt selected for exhibition in the Sheridan gallery</p>
         </div>
       </div>
-  <div class="process-gallery" id="digital-grid">
-        <figure class="process-item">
-          <div class="thumb-wrap" tabindex="0" role="button" aria-label="Skirt development 1">
-            <img src="assets/skirt1.png" alt="Skirt development 1">
-          </div>
-        </figure>
-        <figure class="process-item">
-          <div class="thumb-wrap" tabindex="0" role="button" aria-label="Skirt development 2">
-            <img src="assets/skirt2.png" alt="Skirt development 2">
-          </div>
-        </figure>
-        <figure class="process-item">
-          <div class="thumb-wrap" tabindex="0" role="button" aria-label="Skirt development 3">
-            <img src="assets/skirt3.png" alt="Skirt development 3">
-          </div>
-        </figure>
-        <figure class="process-item">
-          <div class="thumb-wrap" tabindex="0" role="button" aria-label="Skirt development 4">
-            <img src="assets/skirt4.png" alt="Skirt development 4">
-          </div>
-        </figure>
-        <figure class="process-item">
-          <div class="thumb-wrap" tabindex="0" role="button" aria-label="Skirt development 5">
-            <img src="assets/skirt5.png" alt="Skirt development 5">
-          </div>
-        </figure>
-        <figure class="process-item">
-          <div class="thumb-wrap" tabindex="0" role="button" aria-label="Skirt development 6">
-            <img src="assets/skirt6.png" alt="Skirt development 6">
-          </div>
-        </figure>
-      </div>
-      <!-- Full-bleed banner for Art Show -->
-      <div class="process-banner">
-        <div class="process-banner-inner">
-          <h3>Art Show</h3>
-          <p class="process-banner-desc">Embroidered skirt piece selected for exhibition in the Sheridan Interaction Design program gallery, showcasing the intersection of craft, concept, and user-centered storytelling through material design.</p>
-        </div>
-      </div>
-      <div class="process-gallery" id="final-grid">
-        <figure class="process-item">
-          <div class="thumb-wrap" tabindex="0" role="button" aria-label="Art show skirt">
-            <img src="assets/skirt6.JPG" alt="Skirt art show image">
-          </div>
-        </figure>
-        <figure class="process-item">
-          <div class="thumb-wrap" tabindex="0" role="button" aria-label="Art show IMG 6313">
-            <img src="assets/IMG_6313.jpg" alt="Art show IMG 6313">
-          </div>
-        </figure>
-        <figure class="process-item">
-          <div class="thumb-wrap" tabindex="0" role="button" aria-label="Art show skirt 2">
-            <img src="assets/skirt7.JPG" alt="Skirt art show image 2">
-          </div>
-        </figure>
-    </div>
     </section>
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <!-- Reflection Section -->
+    <!-- <section class="scroll-reveal">
+      <h2>Reflection</h2>
+      <p>This project taught me how to balance form and function when integrating technology into wearables. The challenge was making circuits invisible while keeping them reliable, requiring careful planning, precise craftsmanship, and iterative testing. Seeing the skirt exhibited in the Sheridan gallery validated the importance of blending technical skill with aesthetic intention, creating work that is both functional and meaningful.</p>
+    </section> -->
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <script>
+      // Removed per user request
+    </script>
   </main>
   <footer class="site-footer">
     <div class="footer-content">

@@ -5,8 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Augmented Reality | Olivia Weiss Portfolio</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
+  <!-- Parallax Background Layers -->
+  <div class="parallax-container">
+    <div class="parallax-layer parallax-bg"></div>
+    <div class="parallax-layer parallax-shapes">
+      <div class="shape shape-circle"></div>
+      <div class="shape shape-square"></div>
+      <div class="shape shape-triangle"></div>
+    </div>
+    <div class="parallax-layer parallax-gradient"></div>
+  </div>
+  
   <nav class="navbar">
   <div class="nav-logo"><a href="index.html#hero">Olivia Weiss</a></div>
     <ul class="nav-links">
@@ -29,119 +42,131 @@
     <div class="project-actions">
       <a class="btn btn-visit" href="https://www.youtube.com/shorts/1UZvK_0lNFE" target="_blank" rel="noopener noreferrer">Visit project</a>
     </div>
+
+    <!-- Overview Section -->
     <section>
-  <h2>Design Statement</h2>
-  <!-- <p>This project reimagines a traditional book cover as an interactive augmented reality experience. By merging physical design with digital storytelling, it transforms reading into an immersive journey that connects emotion, sport, and strategy.</p> -->
-  <!-- <p><strong>Design Statement:</strong></p> -->
-  <p class="design-paragraph">The book <em>Heads Up Baseball</em> is aimed at athletes and coaches and covers mental toughness, confidence/self-belief, emotional control, and process-oriented thinking. These themes are represented through my original book design by a baseball diamond blueprint. These themes are brought to life with my AR enhancement by using a box of cards, a 3D baseball diamond, and baseball cards. These visual choices signify strategic planning, navigating the game, as well as the connection between the physical and mental game, using analogy, allusion, and personification. The baseball field and cards can act as an analogy to life in sports, having the cards placed at each base mirrors significant moments and or player influence. The quotes that are presented on the back of each baseball card act as an allusion as they allude to themes and relevant people not only to the book but also to baseball culture and history. Personification is shown through the quotes on the baseball cards and animations. With these features, the baseball cards feel more lifelike, giving a better vision of the players' memories and&nbsp;actions.</p>
-    </section>
-    <section>
-      <h2>Key Features</h2>
-      <ul>
-        <li><strong>Augmented Reality</strong> – AR expands the physical book into an interactive experience, connecting the mental and physical sides of the game through 3D visuals and engagement.</li>
-        <li><strong>Strategic Visual Choices</strong> – Blueprint = planning and discipline; Cards = culture and memory; AR = immersion and presence.</li>
-        <li><strong>Emotional & Cultural Depth</strong> – The design acts as more than explanation—it embodies baseball as a metaphor for resilience, teamwork, and growth.</li>
-        <li><strong>Thematic Representation</strong> – The baseball diamond blueprint symbolizes mental toughness, confidence, emotional control, and process-oriented thinking, tying strategy in sport to mindset.</li>
-      </ul>
-    </section>
-    <section>
-      <h2>Process Work</h2>
-      <!-- <p><strong>Process Documentation:</strong></p> -->
-      <p>The design process began with sketching and concept exploration to capture the book’s narrative in physical form. These early ideas evolved into digital prototypes and 3D models, refining how AR could interact with structure and layout. Below is a deeper look at how the concept developed — from ideation to final execution.</p>
+      <h2>Overview</h2>
+      <p class="design-paragraph">An augmented reality enhanced book design inspired by Heads Up Baseball,
+exploring mental toughness, confidence, and emotional control in sport. A
+baseball diamond blueprint and interactive baseball cards use analogy and motion
+to connect the mental and physical game, creating an immersive experience.</p>
     </section>
 
-    <!-- Full-bleed process banner -->
-    <div class="process-banner">
-      <div class="process-banner-inner">
-        <h3>Sketches</h3>
-        <p class="process-banner-desc">These sketches capture early ideation and rapid exploration — quick marks that helped me test forms, hierarchy, and spatial relationships before moving into digital prototypes.</p>
-      </div>
-    </div>
-
-    <div id="process-sections">
-  <section class="process-block">
-    <!-- toggles removed per user request -->
-  <div class="process-gallery" id="sketches-grid"></div>
-  </section>
-      <section class="process-block">
-        <!-- Full-bleed banner for Digital Work -->
-        <div class="process-banner">
-          <div class="process-banner-inner">
-            <h3>Digital Work</h3>
-            <p class="process-banner-desc">Digital explorations and prototypes that translate sketches into interactive mockups, 3D models, and AR behaviors—focused on motion, interaction, and final fidelity.</p>
-          </div>
+    <!-- What/Who/Why Grid -->
+    <section>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>What</h3>
+          <p>A redesigned physical book cover featuring a baseball diamond blueprint, paired with an augmented reality experience that includes a 3D baseball diamond and animated baseball cards to extend the book's themes beyond the page.</p>
         </div>
-        <div class="process-gallery" id="digital-grid"></div>
-        <!-- Final Project section removed per request -->
-      </section>
-    </div>
+        <div class="info-card">
+          <h3>Who</h3>
+          <p>Designed for athletes, coaches, and baseball enthusiasts who are interested in the mental side of the game and want a quick, engaging preview of the book before purchasing.</p>
+        </div>
+        <div class="info-card">
+          <h3>Why</h3>
+          <p>To provide an engaging augmented reality preview that communicates the book's core themes at a glance, helping users quickly understand its focus on the mental game of baseball while encouraging interest and purchase.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <!-- Problem Section with side image -->
+    <section class="scroll-reveal">
+      <div class="two-column-section">
+        <div class="text-column">
+          <h2>Problem / Opportunity</h2>
+          <p>This project explores how augmented reality can extend a physical book to help visualize abstract mental performance concepts in sport. While books can explain ideas like confidence and emotional control, they rarely offer an experiential way to engage with them.</p>
+          <p>This project investigates how metaphor and interaction can make those ideas more tangible.</p>
+        </div>
+        <div class="image-column">
+          <img src="assets/imgcard1.png" alt="AR Concept visualization">
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <!-- Key Features as Cards -->
+    <section class="scroll-reveal">
+      <h2>Key Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">AR</div>
+          <h3>Augmented Reality</h3>
+          <p>AR expands the physical book into an interactive experience, connecting the mental and physical sides of the game through 3D visuals and engagement.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Strategic Visuals</h3>
+          <p>Blueprint = planning and discipline; Cards = culture and memory; AR = immersion and presence.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">❤️</div>
+          <h3>Emotional Depth</h3>
+          <p>The design acts as more than explanation. It embodies baseball as a metaphor for resilience, teamwork, and growth.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚾</div>
+          <h3>Thematic Design</h3>
+          <p>The baseball diamond blueprint symbolizes mental toughness, confidence, emotional control, and process-oriented thinking.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <!-- Process and Exploration Section -->
+    <section class="scroll-reveal">
+      <h2>Process and Exploration</h2>
+      <div class="process-exploration-grid">
+        <div class="process-item">
+          <img src="assets/paper2.png" alt="Blueprint concepts">
+          <p class="caption"> Inital storyboard for AR development</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/IMG1.png" alt="Initial sketches">
+          <p class="caption">Developed storyboard for AR development</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/IMG13.png" alt="Card designs">
+          <p class="caption">Modeled baseball cards and box for AR interaction</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/IMG7.png" alt="Digital prototypes">
+          <p class="caption">Inital sketch for the box exterior</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/IMG18.png" alt="3D models">
+          <p class="caption">Developed sketch for the box exterior</p>
+        </div>
+        <div class="process-item">
+          <img src="assets/IMG14.png" alt="Final design">
+          <p class="caption">Digital exterior design</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <!-- Reflection Section -->
+    <!-- <section class="scroll-reveal">
+      <h2>Reflection</h2>
+      <p>This project pushed me to explore how AR can transform static design into an interactive experience. The challenge was balancing metaphor with clarity, ensuring the baseball diamond and cards communicated meaning without overwhelming the user. I learned the importance of intentional design choices and how layering physical and digital elements can create depth and engagement.</p>
+    </section> -->
+
+    <!-- Visual Break -->
+    <div class="visual-spacer"></div>
+
+    <!-- Process Work section removed per user request -->
 
     <script>
-      const imagesMeta = [
-      { file: 'assets/project1img.png', caption: 'Project 1 image', size: 0 },
-      { file: 'assets/paper1.png', caption: 'Paper 1', size: 0 },
-      { file: 'assets/paper2.png', caption: 'Paper 2', size: 0 },
-      { file: 'assets/paper3.png', caption: 'Paper 3', size: 0 },
-      { file: 'assets/paper4.png', caption: 'Paper 4', size: 0 },
-      { file: 'assets/paper5.png', caption: 'Paper 5', size: 0 },
-      { file: 'assets/paper6.png', caption: 'Paper 6', size: 0 },
-      { file: 'assets/paper7.png', caption: 'Paper 7', size: 0 },
-      { file: 'assets/paper8.png', caption: 'Paper 8', size: 0 },
-      { file: 'assets/paper9.png', caption: 'Paper 9', size: 0 },
-      { file: 'assets/paper10.png', caption: 'Paper 10', size: 0 },
-      { file: 'assets/paper11.png', caption: 'Paper 11', size: 0 },
-      { file: 'assets/paper12.png', caption: 'Paper 12', size: 0 },
-      
-  { file: 'assets/digwork1.png', caption: 'Digital Work 1', size: 0 },
-  { file: 'assets/digwork2.png', caption: 'Digital Work 2', size: 0 },
-  { file: 'assets/digwork3.png', caption: 'Digital Work 3', size: 0 },
-  { file: 'assets/digwork4.png', caption: 'Digital Work 4', size: 0 },
-  { file: 'assets/digwork5.png', caption: 'Digital Work 5', size: 0 },
-  { file: 'assets/digwork6.png', caption: 'Digital Work 6', size: 0 },
-
-  { file: 'assets/finaldig1.png', caption: 'Final Digital 1', size: 0 },
-  { file: 'assets/finaldig2.png', caption: 'Final Digital 2', size: 0 },
-  { file: 'assets/finaldig3.png', caption: 'Final Digital 3', size: 0 },
-
-];
-
-const FORCED_SKETCHES = [
-  'assets/paper1.png','assets/paper2.png','assets/paper3.png','assets/paper4.png','assets/paper5.png','assets/paper6.png','assets/paper7.png','assets/paper8.png','assets/paper9.png','assets/paper10.png','assets/paper11.png','assets/paper12.png',
-  
-];
-const FORCED_DIGITAL = ['assets/digwork1.png','assets/digwork2.png','assets/digwork3.png','assets/digwork4.png','assets/digwork5.png','assets/digwork6.png','assets/finaldig1.png','assets/finaldig2.png','assets/finaldig3.png'];
-// Final project section removed — no FORCED_FINAL array needed.
-
-function render() {
-  const sketchesGrid = document.getElementById('sketches-grid');
-  const digitalGrid = document.getElementById('digital-grid');
-
-  sketchesGrid.innerHTML = '';
-  digitalGrid.innerHTML = '';
-
-  imagesMeta.forEach(img => {
-    const fig = document.createElement('figure');
-    fig.className = 'process-item';
-    const image = document.createElement('img');
-    image.src = img.file;
-    image.alt = img.caption;
-    const wrap = document.createElement('div');
-    wrap.className = 'thumb-wrap';
-    wrap.tabIndex = 0;
-    wrap.setAttribute('role', 'button');
-    wrap.setAttribute('aria-label', image.alt || img.src || 'Open image');
-    wrap.appendChild(image);
-    fig.appendChild(wrap);
-
-    if (FORCED_SKETCHES.includes(img.file)) {
-      sketchesGrid.appendChild(fig);
-    } else if (FORCED_DIGITAL.includes(img.file)) {
-      digitalGrid.appendChild(fig);
-    }
-  });
-}
-
-render();
+      // Image rendering code removed per user request
     </script>
   </main>
   <footer class="site-footer">

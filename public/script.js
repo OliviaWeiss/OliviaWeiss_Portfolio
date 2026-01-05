@@ -190,9 +190,250 @@ document.addEventListener('DOMContentLoaded', () => {
   if(videoClose) videoClose.addEventListener('click', closeVideoModal);
   if(videoModal) videoModal.addEventListener('click', function(e){ if(e.target === videoModal) closeVideoModal(); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && videoModal && videoModal.getAttribute('aria-hidden') === 'false') closeVideoModal(); });
+
+  // Scroll-triggered fade-in animations for sections
+  const fadeInSections = document.querySelectorAll('.fade-in-section');
+  
+  const fadeInObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, {
+    threshold: 0.05,
+    rootMargin: '0px 0px -100px 0px'
+  });
+
+  fadeInSections.forEach(section => {
+    fadeInObserver.observe(section);
+  });
+
+  // GSAP ScrollTrigger scroll reveal animations
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // First, set all elements to invisible
+    gsap.set('.scroll-reveal', { opacity: 0, y: 30 });
+    
+    // Animate each scroll-reveal element
+    gsap.utils.toArray('.scroll-reveal').forEach((element, index) => {
+      gsap.to(element, {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+          onEnter: () => console.log('Animating:', element.querySelector('h2, h3')?.textContent || element.tagName)
+        }
+      });
+    });
+    
+    // Parallax Background Animations
+    // Slow-moving main background
+    gsap.to('.parallax-bg', {
+      yPercent: 30,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1
+      }
+    });
+    
+    // Gradient shifts and fades based on scroll
+    gsap.to('.parallax-gradient', {
+      opacity: 0.8,
+      yPercent: -20,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: '50% top',
+        scrub: 1
+      }
+    });
+    
+    gsap.to('.parallax-gradient', {
+      opacity: 0,
+      yPercent: -50,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: 'body',
+        start: '50% top',
+        end: 'bottom top',
+        scrub: 1
+      }
+    });
+    
+    // Floating shapes move in different directions
+    gsap.to('.shape-circle', {
+      y: 200,
+      x: -100,
+      rotate: 90,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 2
+      }
+    });
+    
+    gsap.to('.shape-square', {
+      y: -150,
+      x: 100,
+      rotate: 135,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1.5
+      }
+    });
+    
+    gsap.to('.shape-triangle', {
+      y: 300,
+      x: -50,
+      rotate: -45,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 2.5
+      }
+    });
+    
+    console.log('GSAP ScrollTrigger initialized with', document.querySelectorAll('.scroll-reveal').length, 'elements');
+  } else {
+    console.error('GSAP or ScrollTrigger not loaded');
+  }
+
+  // Scroll-based Text Animation
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    const textLines = document.querySelectorAll('.text-line');
+    const progressDots = document.querySelectorAll('.progress-dot');
+    const TOTAL_LINES = textLines.length;
+    const VERTICAL_OFFSET = 40;
+    const ANIMATION_EASE = 'power2.inOut';
+
+    if (TOTAL_LINES > 0) {
+      // Set all lines to completely hidden initially
+      gsap.set('.text-line', { 
+        opacity: 0, 
+        y: VERTICAL_OFFSET,
+        display: 'none'
+      });
+
+      // Pin the text container while scrolling through the entire section
+      ScrollTrigger.create({
+        trigger: '.text-animation-section',
+        start: 'top top',
+        end: 'bottom bottom',
+        pin: '.text-pin-container',
+        pinSpacing: true,
+        anticipatePin: 1,
+        markers: false
+      });
+
+      // Animate each text line with complete separation
+      textLines.forEach((line, index) => {
+        const startPercent = (index / TOTAL_LINES) * 100;
+        const endPercent = ((index + 1) / TOTAL_LINES) * 100;
+        const rangeSize = endPercent - startPercent;
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.text-animation-section',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1,
+            onUpdate: (self) => {
+              const progress = self.progress * 100;
+              
+              // Update progress dots
+              if (progress >= startPercent && progress < endPercent) {
+                progressDots.forEach(dot => dot.classList.remove('active'));
+                progressDots[index]?.classList.add('active');
+              }
+              
+              // Force hide other lines when this one is active
+              textLines.forEach((otherLine, otherIndex) => {
+                if (otherIndex !== index) {
+                  const otherStart = (otherIndex / TOTAL_LINES) * 100;
+                  const otherEnd = ((otherIndex + 1) / TOTAL_LINES) * 100;
+                  
+                  // If we're in this line's range and the other line should be hidden
+                  if (progress >= startPercent && progress < endPercent) {
+                    if (progress < otherStart || progress >= otherEnd) {
+                      gsap.set(otherLine, { display: 'none', opacity: 0 });
+                    }
+                  }
+                }
+              });
+            }
+          }
+        });
+
+        // Timing: 20% fade in, 50% visible, 20% fade out, 10% gap
+        const fadeInStart = startPercent / 100;
+        const fadeInEnd = (startPercent + (rangeSize * 0.20)) / 100;
+        const fadeOutStart = (startPercent + (rangeSize * 0.70)) / 100;
+        const fadeOutEnd = (startPercent + (rangeSize * 0.90)) / 100;
+
+        // Show and fade in
+        tl.to(line, {
+          display: 'block',
+          opacity: 1,
+          y: 0,
+          ease: 'power2.out',
+          duration: fadeInEnd - fadeInStart
+        }, fadeInStart);
+
+        // Hold visible
+        tl.to(line, {
+          opacity: 1,
+          y: 0,
+          duration: fadeOutStart - fadeInEnd
+        }, fadeInEnd);
+
+        // Fade out
+        tl.to(line, {
+          opacity: 0,
+          y: -VERTICAL_OFFSET,
+          ease: 'power2.in',
+          duration: fadeOutEnd - fadeOutStart
+        }, fadeOutStart);
+
+        // Hide completely
+        tl.to(line, {
+          display: 'none',
+          opacity: 0,
+          duration: (endPercent / 100) - fadeOutEnd
+        }, fadeOutEnd);
+
+        // Ensure fully hidden at the end
+        tl.to(line, {
+          opacity: 0,
+          y: -VERTICAL_OFFSET,
+          duration: (endPercent / 100) - fadeOutEnd
+        }, fadeOutEnd);
+      });
+
+      // Initialize first dot
+      progressDots[0]?.classList.add('active');
+      
+      console.log('Scroll text animation initialized with', TOTAL_LINES, 'text lines');
+    }
+  }
 });
 
-// Lightbox for project images (delegated)
 // Lightbox for project images (delegated)
 document.addEventListener('click', function(e){
   const target = e.target;
@@ -260,4 +501,3 @@ document.addEventListener('keydown', function(e){
       }
     }
   });
-
