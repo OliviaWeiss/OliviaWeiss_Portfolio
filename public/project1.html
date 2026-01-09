@@ -30,145 +30,108 @@
       <li><a href="https://www.linkedin.com/in/olivia-weiss-196aa1234/" target="_blank">LinkedIn</a></li>
     </ul>
   </nav>
-  <main class="project-detail">
-    <a href="index.html#portfolio" class="back-arrow" aria-label="Back to projects">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Back
-    </a>
-    <div class="project-feature" aria-hidden="false">
-      <img src="assets/project1img.png" alt="Featured process image" class="featured-img">
-    </div>
-    <h1>Augmented Reality</h1>
-    <div class="project-actions">
-      <a class="btn btn-visit" href="https://www.youtube.com/shorts/1UZvK_0lNFE" target="_blank" rel="noopener noreferrer">Visit project</a>
-    </div>
+  
+  <!-- Back Arrow -->
+  <a href="index.html#portfolio" class="case-study-back-arrow" aria-label="Back to projects">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back
+  </a>
 
-    <!-- Overview Section -->
-    <section>
-      <h2>Overview</h2>
-      <p class="design-paragraph">An augmented reality enhanced book design inspired by Heads Up Baseball,
-exploring mental toughness, confidence, and emotional control in sport. A
-baseball diamond blueprint and interactive baseball cards use analogy and motion
-to connect the mental and physical game, creating an immersive experience.</p>
-    </section>
+  <!-- Hero Section -->
+  <section class="case-study-hero">
+    <div class="case-study-hero-bg" style="background-image: url('assets/ARcards.png'); background-size: cover; background-repeat: no-repeat; background-position: center; filter: blur(3px);"></div>
+    <div class="case-study-hero-overlay"></div>
+    <div class="case-study-hero-content">
+      <h1>Augmented Reality</h1>
+      <p class="case-study-hero-role">Interaction Design • AR Experience</p>
+      <p class="case-study-hero-desc">An augmented reality enhanced book design exploring mental toughness and emotional control in sport through interactive baseball cards and 3D visualization.</p>
+      <a class="case-study-hero-cta" href="https://www.youtube.com/shorts/1UZvK_0lNFE" target="_blank" rel="noopener noreferrer">View Demo →</a>
+    </div>
+  </section>
 
-    <!-- What/Who/Why Grid -->
-    <section>
-      <div class="info-grid">
-        <div class="info-card">
-          <h3>What</h3>
-          <p>A redesigned physical book cover featuring a baseball diamond blueprint, paired with an augmented reality experience that includes a 3D baseball diamond and animated baseball cards to extend the book's themes beyond the page.</p>
-        </div>
-        <div class="info-card">
-          <h3>Who</h3>
-          <p>Designed for athletes, coaches, and baseball enthusiasts who are interested in the mental side of the game and want a quick, engaging preview of the book before purchasing.</p>
-        </div>
-        <div class="info-card">
-          <h3>Why</h3>
-          <p>To provide an engaging augmented reality preview that communicates the book's core themes at a glance, helping users quickly understand its focus on the mental game of baseball while encouraging interest and purchase.</p>
-        </div>
+  <main class="case-study-main">
+    <!-- Split Section: What -->
+    <section class="case-study-split case-study-animate">
+      <div class="case-study-split-image">
+        <img src="assets/imgcard1.png" alt="AR visualization" style="object-fit: contain; object-position: center; transform: scale(0.8);">
+      </div>
+      <div class="case-study-split-text">
+        <h2>What</h2>
+        <p>A redesigned physical book cover featuring a baseball diamond blueprint, paired with an augmented reality experience that includes a 3D baseball diamond and animated baseball cards to extend the book's themes beyond the page.</p>
       </div>
     </section>
 
-    <!-- Visual Break -->
-    <div class="visual-spacer"></div>
-
-    <!-- Problem Section with side image -->
-    <section class="scroll-reveal">
-      <div class="two-column-section">
-        <div class="text-column">
-          <h2>Problem / Opportunity</h2>
-          <p>This project explores how augmented reality can extend a physical book to help visualize abstract mental performance concepts in sport. While books can explain ideas like confidence and emotional control, they rarely offer an experiential way to engage with them.</p>
-          <p>This project investigates how metaphor and interaction can make those ideas more tangible.</p>
-        </div>
-        <div class="image-column">
-          <img src="assets/imgcard1.png" alt="AR Concept visualization">
-        </div>
+    <!-- Split Section: Why (Image Right) -->
+    <section class="case-study-split case-study-split-reverse case-study-animate">
+      <div class="case-study-split-image" style="display: flex; align-items: center; justify-content: center;">
+        <img src="assets/project1img.png" alt="Initial concepts" style="object-fit: cover; transform: scale(1.2);">
+      </div>
+      <div class="case-study-split-text">
+        <h2>Why</h2>
+        <p>This project explores how augmented reality can extend a physical book to help visualize abstract mental performance concepts in sport. While books can explain ideas like confidence and emotional control, they rarely offer an experiential way to engage with them.</p>
+        <h3 style="margin-top: 2rem;">Problem / Opportunity</h3>
+        <p>This project investigates how metaphor and interaction can make those ideas more tangible, creating a bridge between reading about mental toughness and experiencing its principles through interactive AR storytelling.</p>
       </div>
     </section>
 
-    <!-- Visual Break -->
-    <div class="visual-spacer"></div>
-
-    <!-- Key Features as Cards -->
-    <section class="scroll-reveal">
+    <!-- Full Width Features -->
+    <section class="case-study-features case-study-animate">
       <h2>Key Features</h2>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon">AR</div>
+      <div class="case-study-features-grid">
+        <div class="case-study-feature-item">
+          <div class="case-study-feature-visual">
+            <img src="assets/IMG13.png" alt="Baseball cards AR">
+          </div>
           <h3>Augmented Reality</h3>
-          <p>AR expands the physical book into an interactive experience, connecting the mental and physical sides of the game through 3D visuals and engagement.</p>
+          <p>AR expands the physical book into an interactive experience, connecting the mental and physical sides of the game.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
+        <div class="case-study-feature-item">
+          <div class="case-study-feature-visual">
+            <img src="assets/IMG1.png" alt="Strategic planning">
+          </div>
           <h3>Strategic Visuals</h3>
-          <p>Blueprint = planning and discipline; Cards = culture and memory; AR = immersion and presence.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">❤️</div>
-          <h3>Emotional Depth</h3>
-          <p>The design acts as more than explanation. It embodies baseball as a metaphor for resilience, teamwork, and growth.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚾</div>
-          <h3>Thematic Design</h3>
-          <p>The baseball diamond blueprint symbolizes mental toughness, confidence, emotional control, and process-oriented thinking.</p>
+          <p>Blueprint equals planning and discipline; Cards equals culture and memory; AR equals immersion and presence.</p>
         </div>
       </div>
     </section>
 
-    <!-- Visual Break -->
-    <div class="visual-spacer"></div>
-
-    <!-- Process and Exploration Section -->
-    <section class="scroll-reveal">
+    <!-- Process Section -->
+    <section class="case-study-process case-study-animate">
       <h2>Process and Exploration</h2>
-      <div class="process-exploration-grid">
-        <div class="process-item">
-          <img src="assets/paper2.png" alt="Blueprint concepts">
-          <p class="caption"> Inital storyboard for AR development</p>
+      <div class="case-study-process-grid">
+        <div class="case-study-process-item">
+          <img src="assets/paper2.png" alt="Initial storyboard">
         </div>
-        <div class="process-item">
-          <img src="assets/IMG1.png" alt="Initial sketches">
-          <p class="caption">Developed storyboard for AR development</p>
+        <div class="case-study-process-item">
+          <img src="assets/IMG1.png" alt="Developed storyboard">
         </div>
-        <div class="process-item">
-          <img src="assets/IMG13.png" alt="Card designs">
-          <p class="caption">Modeled baseball cards and box for AR interaction</p>
+        <div class="case-study-process-item">
+          <img src="assets/IMG13.png" alt="Card models">
         </div>
-        <div class="process-item">
-          <img src="assets/IMG7.png" alt="Digital prototypes">
-          <p class="caption">Inital sketch for the box exterior</p>
+        <div class="case-study-process-item">
+          <img src="assets/IMG7.png" alt="Box sketch">
         </div>
-        <div class="process-item">
-          <img src="assets/IMG18.png" alt="3D models">
-          <p class="caption">Developed sketch for the box exterior</p>
+        <div class="case-study-process-item">
+          <img src="assets/IMG18.png" alt="Developed sketch">
         </div>
-        <div class="process-item">
-          <img src="assets/IMG14.png" alt="Final design">
-          <p class="caption">Digital exterior design</p>
+        <div class="case-study-process-item">
+          <img src="assets/IMG14.png" alt="Digital design">
         </div>
       </div>
     </section>
 
-    <!-- Visual Break -->
-    <div class="visual-spacer"></div>
-
-    <!-- Reflection Section -->
-    <!-- <section class="scroll-reveal">
-      <h2>Reflection</h2>
-      <p>This project pushed me to explore how AR can transform static design into an interactive experience. The challenge was balancing metaphor with clarity, ensuring the baseball diamond and cards communicated meaning without overwhelming the user. I learned the importance of intentional design choices and how layering physical and digital elements can create depth and engagement.</p>
-    </section> -->
-
-    <!-- Visual Break -->
-    <div class="visual-spacer"></div>
-
-    <!-- Process Work section removed per user request -->
-
-    <script>
-      // Image rendering code removed per user request
-    </script>
+    <!-- Final Outcome -->
+    <section class="case-study-outcome case-study-animate">
+      <div class="case-study-outcome-visual">
+        <img src="assets/ARcards.png" alt="Final AR experience">
+      </div>
+      <div class="case-study-outcome-text">
+        <h2>Outcome</h2>
+        <p>The final experience combines physical and digital design to create an immersive exploration of mental toughness in baseball. The AR layer transforms static cards into interactive storytelling elements that help users understand the connection between mental preparation and athletic performance.</p>
+      </div>
+    </section>
   </main>
+
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-info">

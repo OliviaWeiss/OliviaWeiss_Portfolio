@@ -501,3 +501,46 @@ document.addEventListener('keydown', function(e){
       }
     }
   });
+
+  // Portfolio scroll animations using IntersectionObserver
+  const portfolioRows = document.querySelectorAll('.portfolio-row');
+  
+  const portfolioObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const panels = entry.target.querySelectorAll('.portfolio-panel');
+        panels.forEach(panel => {
+          panel.classList.add('animate-in');
+        });
+        // Unobserve after animation triggers once
+        portfolioObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.2,
+    rootMargin: '0px 0px -100px 0px'
+  });
+
+  portfolioRows.forEach(row => {
+    portfolioObserver.observe(row);
+  });
+
+  // Case Study scroll animations
+  const caseStudyElements = document.querySelectorAll('.case-study-animate');
+  
+  const caseStudyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        // Unobserve after animation triggers once
+        caseStudyObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  caseStudyElements.forEach(element => {
+    caseStudyObserver.observe(element);
+  });
